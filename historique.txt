@@ -1,0 +1,182 @@
+==================================
+=   Historique de X-OS
+==================================
+07/09/2025: version 0.3.4 (21 ans plus tard xD )
+  - Mise à jour de Makefile pour prendre en compte 27ans de changement dans les compilateurs et linkers.
+  - Correction mineurs pour permettre le fonctionnement de X-OS avec les versions modernes de gcc et nasm.
+  - petit correctif pour le driver disquette et la commande ls.
+
+
+23/09/2004: version 0.3.3
+   - Correction d'un bug d'affichage sur la console
+     
+   - Correction d'un bug dans la table de caractères anglais (qui ampéchait la
+     detection des paramètres de commandes du shell lorsqu'on activait le
+     clavier anglais)
+
+   - une première version du gestionnaire des allocations dynamiques
+     (xosmalloc) est maintenant fonctionnelle,
+     allocation/liberation/optimisation des zones libres,
+     reste maintenant une phase de test avant d'utiliser les fonctions malloc
+     et free dans les autres modules.
+
+
+     
+
+
+05/09/2004: version 0.3.2-a (non officiel, c'est juste pour avoir une trace de
+l'avancement)
+   - Amélioration du module de l'allocation des pages memoire
+   - écriture de nouvelles fonctions pour l'allocation dynamique
+   - On peut desormé allouer des tailles de memoire superieure à 4096 octets
+   - ajout de la fonction free() : fallait bien pouvoir liberrer les zones
+     allouées :)
+
+02/05/2004: version 0.3.2
+   - Amélioration du bootloader (XoLo)
+   - Correction du bug d'affichage dans la console
+   - Debut du developpement d'un debugger interne
+   - Developpement d'un scheduler très simple (pour preparrer au multitasking)
+   - Le mode 16bits est temporairement désactivé (pour les modifs sur XoLo)
+   - Réaménagement totale de la memoire (addresses de chargement du kernel,
+     GDT, IDT, TSS ...)
+
+
+
+18/03/2004: version 0.3.1 ( C pas vraiment une version )
+YOUPIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+   - aujourd'hui vers 1h50 du matin.......Le driver disquette marche enfin
+   - :-))
+   - :-)))))
+   - :-))))))))))))))))))))))))))))))))
+   - euhh... faudra peut etre aller me coucher
+
+
+
+07/03/2004: version 0.3.0   Reprise du projet ;)
+ça devient serieu !!
+   - Réecriture des Makefile pour simplifier l'installation
+   - la GDT l'IDT et le PIC sont maintenant activés là ou il le faut c'est à dire dans le noyau
+   - Adoption du flat mode pour la segmentation (pour simplifier les choses pour l'instant)
+   - Gestion de la pagination (à trois niveau et des pages de 4Ko)
+   - Une première version malloc() et free() , instables mais ce n'est que le debut ;)
+   - Correction de quelques bugs dans la gestion du clavier
+   - Et suite à vos demandes le clavier azerty est implémenté (en mode 32bits seulement)
+
+
+   Note sur cette version :
+      1) Les fonctions du chargement de la GDT et de l'IDT on été inspirées du projet BosoKernel
+      2) Je commance à coder un driver pour la disquette en mode protégé ;)
+
+
+04/11/2003: version 0.2.0
+   - Vous ne pouvez plus compiler X-OS sous windows (sauf avec Cygwin) car le mode 32bits utilise gcc pour la compilation.
+   - Correction d'un bug dans la gestion de la FAT12
+   - Ajout de la commande 'xos32' qui permet de passer en mode protégé
+   - XOS n'exécute plus n'importe quel fichier il cherche d'abord une signature qui indique si le fichier est exécutable
+     Les fichiers système (portant désormais l'extension .xss) ne peuvent plus êtres exécute directement (ils ne portent pas la signature 'exécutable').
+   - Un premier 'VRAI' shell 32bit , il fait pas grand chose mais, maintenant il charge sa propre GDT IDT et initialise le PIC
+     le clavier et gérer ainsi que l'horloge système (timer)
+   - Ajout des 3 premières commandes commande 'cls' , 'aide' et 'ver'
+   - écriture de nombreuses fonctions pour le mode 32 bits, gestion d'affichage, comparaison de chaînes de caractères, gestion du clavier, gestion de l'horloge ...
+   - Le noyau X-OS lit un fichier de configuration au demarrage ce fichier contient le nom du shell à lancer au demarrage  ;-)
+
+
+
+
+25/10/2003: version 0.1.6
+   Apres 8 mois....Je décide de reprendre le projet
+   Réécriture du shell 32 bits (SHL32.COM) en c pour faciliter le développement de ce dernier.
+
+
+
+20/02/2003: version 0.1.4
+   Écriture d'un programme qui permet le passage en mode protégé (enfin)
+   c'est le programme switch32.com, il charge la "GDT" passe en mode protégé puis lance
+   un shell (SHL32.COM)
+
+
+-----------------------8<-----------------------------------------------------------------------
+Jusqu'ici  X-OS fonctinnait seulement en mode reel
+-----------------------8<-----------------------------------------------------------------------
+
+20/02/2003: version 0.1.3
+  Ajout de la fonction load qui permet de charger un programme/un code dans un emplacement
+mémoire, maintenant X-OS peut lancer des programmes :-).
+
+  division de Xosker en 3 parties:
+	- partie 1 : xosker.asm, c'est le noyau du système, cette partie va se charger
+		     des operations de bases (initialisations, détection du materiel installé
+		     installation des interruptions...
+	- partie 2 : shlX.asm, ou le X représente un numéro, cette partie représente, l'interpréteur
+		     de commandes (le shell), c'est cette partie du système qui recevra les commandes
+		     du clavier (ou de la souris) pour les exécuter.
+		     RQ : c'est le noyau qui se charge de charger et de lancer le shell.
+		     ceci donne une souplesse supplémentaire puisqu'il permettra par exemple
+		     d'écrire plusieurs shells "spécialisés".
+	- partie 3 : le logo de X-OS, c'est le fichier .BMP qui s'affiche au démarrage du système
+optimisation du code du secteur boot.
+
+
+26/01/2003: version 0.1.0
+Détournement de l'interruption 21h : X-OS aura maintenant ses propres
+interruptions qui serons utilisé ultérieurement par des programmes qui
+serons écrits pour le système.
+correction de touts les bugs connues.
+
+
+16/01/2003: version 0.0.6
+Écriture des fonction pour la gestion du mode VESA 640x480 256 couleurs.
+détection d'un nouveau bug : lors ce qu'on exécute la commande ls (liste
+des fichier sur disquette) et qu'on appui sur une touche pendant l'exécution
+de cette commande X-OS plante.
+
+
+
+
+
+
+
+Une petite pose et on reprend le projet ;)
+
+
+25/09/2002: version 0.0.3
+Écriture de fonctions pour la gestion du mode graphique VGA 320X200 256 couleurs
+le problème d'ajout de fonctions est résolue avec l'utilisation d'une structure
+de "pointeurs" vers les nom des commandes correspondantes à chaque fonction.
+Quelques bugs fixés.
+détection d'un nouveau bug : X-OS plante si on appui sur certaines touches
+spéciales (F1 à F12 ...).
+ajout de plusieurs commandes.
+
+
+
+20/07/2002: version 0.0.2
+Ajout de quelques petites fonctions (mem, reboot, ver, aide).
+Quelque bugs détectes.
+Des problèmes lors de l'ajout d'une nouvelle fonction.
+
+
+25/06/2002: version 0.0.1
+La première version officielle de xos
+Les plus grands changements sont le fait que le noyau peut être charger
+même s'il n'est pas contiguë c'est au secteur de démarrage de chercher
+l'emplacement du noyau et de le charger, en plus X-OS est à partir de cette
+version compatible avec la FAT12 c'est à dire que la disquette X-OS peut
+être utiliser avec un autre système d'exploitation sans aucun problème.
+
+01/05/2002:
+Le 1er démarrage de X-OS, une version d'essai:
+chargement du kernel affichage du logo (mode texte seulement) puis ... rien
+a ce stade le kernel devait toujours se situé sur les premiers secteurs de
+données et devait être contiguë
+
+
+
+
+
+
+
+
+
+

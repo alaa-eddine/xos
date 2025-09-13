@@ -1,0 +1,26 @@
+----------------------------------------------------
+-- Compilation de X-OS
+----------------------------------------------------
+-- By Alaa-eddine KADDOURI
+-- https://xos.eurekaa.org
+----------------------------------------------------
+
+==========[Lancement de la compilation]=============
+
+Mise a jours de la date de compilation ...
+Terminee
+
+Compilation du secteur de boot ...
+make -s -C boot > /dev/null
+[OK]
+
+Compilation du noyeau 16bits...
+make -s -C 16b/kernel > /dev/null 
+[OK]
+
+Compilation du shell 16bits ...
+make -s -C 16b/shl16 > /dev/null
+[OK]
+
+Compilation du noyau 32bits ...
+make -s -C 32b/kernel32 > /dev/null

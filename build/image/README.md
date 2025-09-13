@@ -1,0 +1,1 @@
+This directory is used to generate the floppy disk image.

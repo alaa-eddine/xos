@@ -6,6 +6,10 @@
 *.ko
 *.obj
 *.elf
+*.xss
+*.com
+*.img
+build/obj/boot
 
 # Linker output
 *.ilk
