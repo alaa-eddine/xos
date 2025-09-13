@@ -5,6 +5,8 @@
 
 A dual-mode operating system developed between 1999-2004 as a learning project to understand Intel x86 architecture and operating system internals.
 
+![alt text](screenshots/xos-qemu.gif)
+
 ## 🎯 Project Background
 
 This project was started when I was 16 years old with the goal of learning:
